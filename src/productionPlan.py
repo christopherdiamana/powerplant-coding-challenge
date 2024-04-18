@@ -18,7 +18,8 @@ class ProductionPlan():
             cost = 0
         elif "gas" in row.type:
             cost_euro_mwh = self.payload.fuels.gas_euro_per_MWh
-            cost = cost_euro_mwh * (1 - row['efficiency'])
+            cost_co2_euro_ton = self.payload.fuels.co2_euro_per_ton
+            cost = cost_euro_mwh * (1 - row['efficiency']) + cost_co2_euro_ton * EMISSION_ALLOWANCES
         elif "turbojet" == row.type:
             cost_euro_mwh = self.payload.fuels.kerosine_euro_per_MWh
             cost = cost_euro_mwh * (1 - row['efficiency'])
